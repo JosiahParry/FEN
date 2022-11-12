@@ -1,13 +1,15 @@
 // use fen module
 // pub mod fen;
-
 // For user input
 // use std::io;
 
+// for reading file
 use std::fs;
 
 // import hashmaps
 use std::collections::HashMap;
+
+use regex::Regex; 
 
 fn main() {
 
@@ -53,9 +55,35 @@ let mut moves: String = String::new();
 
     };
 
-    println!("{moves}");
+    // validate that hash map has the appropriate keys
+    // let required_keys = ["Event", "Site", "Date", "Round", "White", "Black", "Result"];
+    // for key in required_keys {
+    //     let has_required_key = header.contains_key(key);
+    //     println!("{key}");
+    // }
+
+
+    //println!("{moves}");
+
+   // let re = Regex::new(r"[A-Za-z]").unwrap();
+
+    let rav_regex = Regex::new("\\((?:[^{}])*\\)").unwrap();
+    let comment_regex = Regex::new("\\{(?:[^{}])*\\}").unwrap();
+    println!("{}", comment_regex.replace_all(&moves, "")); 
+
+    let comments = comment_regex.captures(&moves).unwrap();
+
+    println!("{}", comment_regex.find(&moves).unwrap().as_str());
+    
+
 
 }
+
+
+// to parse the moves, just remove the Recursive Annotation Variation (RAV)
+// and comments. at a later point we will have to get them in the right place
+
+
 
 
     // // This code chunk takes user input 
@@ -69,16 +97,6 @@ let mut moves: String = String::new();
     // let fen = crate::fen::parsers::parse_fen(fen_string);
     // // print it
     // print!("{}", fen);
-    // // let move = "Ne4";    
-
-
-
-
-
-
-
-
-
 
 
 
