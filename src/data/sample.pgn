@@ -1,0 +1,30 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2022.11.12"]
+[Round "-"]
+[White "macdavidson"]
+[Black "xxjosixx"]
+[Result "0-1"]
+[CurrentPosition "r1r1n3/p6R/p2Bp2p/2Pp2k1/3n4/P5NP/5P2/1R4K1 w - -"]
+[Timezone "UTC"]
+[ECO "D10"]
+[ECOUrl "https://www.chess.com/openings/Slav-Defense"]
+[UTCDate "2022.11.12"]
+[UTCTime "13:49:36"]
+[WhiteElo "585"]
+[BlackElo "615"]
+[TimeControl "300"]
+[Termination "xxjosixx won on time"]
+[StartTime "13:49:36"]
+[EndDate "2022.11.12"]
+[EndTime "13:57:34"]
+[Link "https://www.chess.com/game/live/61999838819"]
+
+1. d4 c6 2. c4 d5 3. cxd5 cxd5 4. Nc3 Nc6 5. Bf4 Nf6 6. e3 Bg4 7. Be2 Bxe2 8.
+Ngxe2 e6 9. O-O Be7 10. Rc1 O-O 11. Ng3 Qb6 12. Qc2 Nb4 13. Qe2 Rfc8 14. a3 Nc6
+15. b4 h6 16. Na4 Qa6 $6 17. Qxa6 bxa6 18. Nc5 Bxc5 $6 19. bxc5 g5 20. Bd6 Kg7 $6
+21. Rb1 Kg6 $6 22. h3 Ne8 23. Rb7 f5 24. Rfb1 f4 25. exf4 gxf4 $2 26. Ne2 Kf5 $4
+(26... Nxd6 27. cxd6 Rd8 (27... f3 28. gxf3 Kf6 (28... Rab8 29. Rxb8 Rxb8 30.
+Rxb8 Nxb8 31. d7))) 27. g4+ fxg3 28. Nxg3+ Kg5 $2 29. Rh7 Nxd4 {<br /><br />Game
+may have continued...} (29... Nxd4 30. f4+ Kg6 31. Rbb7 Nf5 32. Nxf5 Kxf5 33.
+Be5 Rxc5 {+0.98}) 0-1
