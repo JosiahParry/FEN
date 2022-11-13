@@ -19,13 +19,14 @@ fn main() {
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
 
-// create hash map for headers
-let mut header = HashMap::new();
+    // create hash map for headers
+    let mut header = HashMap::new();
 
-// instantiate empty string 
-let mut moves: String = String::new(); 
+    // instantiate empty string 
+    let mut moves: String = String::new(); 
 
     for line in contents.split("\n") {
+
         // let is_header: bool = true;
         // println!("{:?}", line);
         let is_header = line.starts_with("[");
@@ -50,38 +51,63 @@ let mut moves: String = String::new();
             //println!("{key}: {val}");
 
         } else {
+
+            // add space to each line to ensure no annotations are
+            // prepended to a move-number
+            let line = line.to_owned() + " ";
             moves.push_str(&line)
         }
 
     };
 
-    // validate that hash map has the appropriate keys
-    // let required_keys = ["Event", "Site", "Date", "Round", "White", "Black", "Result"];
-    // for key in required_keys {
-    //     let has_required_key = header.contains_key(key);
-    //     println!("{key}");
-    // }
+    // TODO: handle game termination markers
+    // TODO: handle comments
+    // TODO: handle RAV
+
+    // For the sake of simplicity, don't include RAV and comments
+    // to parse the moves, just remove the Recursive Annotation Variation (RAV)
+    // and comments. at a later point we will have to get them in the right place
 
 
-    //println!("{moves}");
-
-   // let re = Regex::new(r"[A-Za-z]").unwrap();
-
+    // extract RAV and Comments
+    // NOTE: need to remove annotations too
+    // comments, annotations, and RAV, can be stored in another vector
+    // thinking alot the lines of a dataframe here tbh
     let rav_regex = Regex::new("\\((?:[^{}])*\\)").unwrap();
     let comment_regex = Regex::new("\\{(?:[^{}])*\\}").unwrap();
-    println!("{}", comment_regex.replace_all(&moves, "")); 
 
-    let comments = comment_regex.captures(&moves).unwrap();
+    //let comment = comment_regex.find(&moves).unwrap().as_str(); 
+    //let rav = rav_regex.find(&moves).unwrap().as_str();
 
-    println!("{}", comment_regex.find(&moves).unwrap().as_str());
+    // remove RAV and comments from moves
+    let moves = comment_regex.
+        replace_all(&moves, "").
+        to_string();
     
+    let moves = rav_regex.
+        replace_all(&moves, "");
 
+    let moves_regex = Regex::new("[0-9]{1,}\\.{1}").unwrap();
+
+    let moves = moves_regex.split(&moves);
+
+    // instantiate a vector for moves
+    let mut move_vec: Vec<String> = Vec::new();
+
+
+    for split in moves {
+        let move_str = split.trim().to_string();
+        if move_str.is_empty() { continue; }
+
+        move_vec.push(move_str); 
+    }
+
+    println!("{:?}", move_vec);
+    
 
 }
 
 
-// to parse the moves, just remove the Recursive Annotation Variation (RAV)
-// and comments. at a later point we will have to get them in the right place
 
 
 
@@ -98,6 +124,13 @@ let mut moves: String = String::new();
     // // print it
     // print!("{}", fen);
 
+
+// validate that hash map has the appropriate keys
+// let required_keys = ["Event", "Site", "Date", "Round", "White", "Black", "Result"];
+// for key in required_keys {
+//     let has_required_key = header.contains_key(key);
+//     println!("{key}");
+// }
 
 
 //let burl = "https://explorer.lichess.ovh/masters?fen=";
