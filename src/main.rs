@@ -75,18 +75,32 @@ fn main() {
     // thinking alot the lines of a dataframe here tbh
     let rav_regex = Regex::new("\\((?:[^{}])*\\)").unwrap();
     let comment_regex = Regex::new("\\{(?:[^{}])*\\}").unwrap();
+    let annotation_regex = Regex::new("\\$[0-9]{1,3}").unwrap();
+    // extract game termination marker
+    let termination_regex = Regex::new("0-1|1-0|1/2-1/2|\\*").unwrap();
+    let game_termination =  termination_regex.find(&moves).unwrap().as_str();
 
     //let comment = comment_regex.find(&moves).unwrap().as_str(); 
     //let rav = rav_regex.find(&moves).unwrap().as_str();
 
-    // remove RAV and comments from moves
+
+    // remove RAV, comments, annotations, termination, from moves
     let moves = comment_regex.
         replace_all(&moves, "").
         to_string();
     
+    let moves: String = annotation_regex.
+        replace_all(&moves, "").
+        to_string();
+
+    let moves: String = termination_regex.
+        replace_all(&moves, "").
+        to_string();
+   
     let moves = rav_regex.
         replace_all(&moves, "");
 
+    // regex to split by move number
     let moves_regex = Regex::new("[0-9]{1,}\\.{1}").unwrap();
 
     let moves = moves_regex.split(&moves);
@@ -98,7 +112,9 @@ fn main() {
     for split in moves {
         let move_str = split.trim().to_string();
         if move_str.is_empty() { continue; }
-
+        let x = move_str.split(" ").collect::<Vec<_>>();
+        println!("{:?}", x);
+    
         move_vec.push(move_str); 
     }
 
