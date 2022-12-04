@@ -29,7 +29,7 @@ impl fmt::Display for Fen {
         write!(f, "{castle}\n")?;        
         // handle active position printing
         let positions = &self.position;
-        for item in positions.iter() {
+        for item in positions.iter().rev() {
             //write!(f, "{:?}\n", item);
             write!(f, "{:?}\n", crate::fen::prettify::translate_pieces(item))?;
         }

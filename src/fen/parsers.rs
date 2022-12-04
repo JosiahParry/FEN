@@ -6,7 +6,9 @@ pub fn parse_position(position: &str) -> Vec<Vec<String>> {
     // instantiate the vector to be filled
     let mut all_ranks: Vec<Vec<String>> = Vec::with_capacity(8);
     // for each rank parse
-    for rnk in rank_pieces.iter() {
+
+    
+    for rnk in rank_pieces.iter().rev() {
         let rnk_i = parse_rank(rnk);
         all_ranks.push(rnk_i);
     }
@@ -72,8 +74,8 @@ pub fn parse_castling(castling: &String) -> crate::fen::structs::CastleRights {
 // PARSE ENTIRE FEN STRING
 pub fn parse_fen(fen: String) -> crate::fen::structs::Fen {
     let fen_parts: Vec<&str> = fen.
-        strip_suffix("\n").
-        unwrap().
+       // strip_suffix("\n").
+       // unwrap().
         split(" ").
         collect();
         
